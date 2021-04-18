@@ -103,12 +103,10 @@ function loginUser($conn, $username, $pwd) {
   }
 
   $checkPwd = password_hash($pwd, PASSWORD_DEFAULT);
-  $matches = $checkPwd === $uidExists["usersPwd"] ? "true" : "false";
 
-  //$checkPwd = password_verify($pwd, $uidExists["usersPwd"]);
+  $checkPwd = password_verify($pwd, $uidExists["usersPwd"]);
 
-  //if ($checkPwd === false) {
-  if ($checkPwd !== $uidExists["usersPwd"]) {
+  if ($checkPwd === false) {
     header("location:../login.php?error=wrongloginb" . $matches);
     exit();
   } else {
